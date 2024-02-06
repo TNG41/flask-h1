@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/static/css/styles.css">
+
+    <title>Stocks Information</title>
+</head>
+<body>
+    <section>
+        <div class="section"> 
+    <h1>Stocks</h1>
+    <table border="1">
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Action</th>
+            <th>Amount</th>
+            <th>Update</th>
+        </tr>
+        {% for stock in stocks %}
+        <tr>
+            <td>{{ stock[0] }}</td>
+            <td>{{ stock[1] }}</td>
+            <td>{{ stock[2] }}</td>
+            <td>
+                <form method="post" action="{{ url_for('display_stocks') }}">
+                    <select name="action">
+                        <option value="add">Add</option>
+                    </select>
+            </td>
+            <td><input type="text" name="amount" id="amount" placeholder="Amount"></td>
+            <td>
+                <form method="post" action="{{ url_for('display_stocks') }}">
+                    <input type="hidden" name="stock_id" value="{{ stock[0] }}">
+                    <input type="submit" value="Update">
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+    <h1>Stocks History</h1>
+
+    {% for stock in stocks %}
+    <h1><a href="/data/{{ stock[0] }}">{{ stock[1] }} </a>(Current {{ stock[2] }})</h2>
+  
+    <h3></h3>
+    <table border="1">
+        <tr>
+            <th>Day</th>
+            <th>Old Amount</th>
+            <th>Add Amount</th>
+            <th>Time</th>
+        </tr>
+        {% for entry in price_history[stock[0]] [:10] %}
+        <tr>
+            <td>{{ entry[0] }}</td>
+            <td>{{ entry[1] }}</td>
+            <td>{{ entry[2] }}</td>
+            <td>{{ entry[3] }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% endfor %}
+</div>   
+</section>
+</body>
+</html>

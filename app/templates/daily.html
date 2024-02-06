@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Sales</title>
+</head>
+<body>
+    <h1>Daily Sales</h1>
+
+    {% if error_message %}
+        <p>{{ error_message }}</p>
+    {% endif %}
+
+    <table border="1">
+        <tr>
+            <th>Disp ID</th>
+            <th>prod_id</th>
+            <th>Previous</th>
+            <th>Current</th>
+            <th></th>
+            <th>New</th>
+        </tr>
+        {% for stock in stocks %}
+        <tr>
+            <td>{{ stock[0] }}</td>
+            <td>{{ stock_map[stock[1]] }}</td>
+            <td>{{ stock[2] }}</td>
+            <td>{{ stock[3] }}</td>
+            <td>
+                <form  method="post" action="{{ url_for('disp_stocks') }}">
+                    <input type="hidden" name="action" value="subtract">
+                        
+                    </input>
+            </td>
+            <td><input type="text" name="new_price" id="new_price" placeholder="Amount"></td>
+            <td>
+                <form method="post" action="{{ url_for('disp_stocks') }}">
+                    <input type="hidden" name="disp_id" value="{{ stock[0] }}">
+                    <input type="hidden" name="p_id" value="{{ stock[1] }}">
+                    <input type="submit" value="Update">
+                </form>
+            </td>
+            <td>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+    
+</body>
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ stock_info[0] }} </title>
+</head>
+<body>
+    <h1> {{ stock_info[0] }} (Current {{ stock_info[1] }})</h1>
+    <table border="1">
+        <tr>
+            <th>Previous Amount</th>
+            <th>Add Amount</th>
+            <th>Time</th>
+        </tr>
+        {% for entry in price_history %}
+        <tr>
+            <td>{{ entry[2] }}</td>
+            <td>{{ entry[3] }}</td>
+            <td>{{ entry[4] }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
