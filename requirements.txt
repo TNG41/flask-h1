@@ -1,7 +1,6 @@
 ﻿blinker==1.7.0
 brotlipy==0.7.0
 certifi==2020.12.5
-chardet @ file:///C:/ci/chardet_1605296577955/work
 click==8.1.7
 colorama==0.4.6
 conda==4.9.2
